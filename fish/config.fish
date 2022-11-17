@@ -1,22 +1,8 @@
-#  ____ _____
-# |  _ \_   _|  Derek Taylor (DistroTube)
-# | | | || |    http://www.youtube.com/c/DistroTube
-# | |_| || |    http://www.gitlab.com/dwt1/
-# |____/ |_|
-#
-# My fish config. Not much to see here; just some pretty standard stuff.
-
-### ADDING TO THE PATH
-# First line removes the path; second line sets it.  Without the first line,
-# your path gets massive and fish becomes very slow.
-set -e fish_user_paths
-set -U fish_user_paths $HOME/.local/bin $HOME/Applications $fish_user_paths
-
 ### EXPORT ###
 set fish_greeting                                 # Supresses fish's intro message
 set TERM "xterm-256color"                         # Sets the terminal type
-set EDITOR "emacsclient -t -a ''"                 # $EDITOR use Emacs in terminal
-set VISUAL "emacsclient -c -a emacs"              # $VISUAL use Emacs in GUI mode
+set EDITOR "nvim"                 # $EDITOR use Emacs in terminal
+set VISUAL "nvim"              # $VISUAL use Emacs in GUI mode
 
 ### "nvim" as manpager
 # set -x MANPAGER "nvim -c 'set ft=man' -"
@@ -34,61 +20,6 @@ set fish_color_autosuggestion '#7d7d7d'
 set fish_color_command brcyan
 set fish_color_error '#ff6c6b'
 set fish_color_param brcyan
-
-### SPARK ###
-set -g spark_version 1.0.0
-
-complete -xc spark -n __fish_use_subcommand -a --help -d "Show usage help"
-complete -xc spark -n __fish_use_subcommand -a --version -d "$spark_version"
-complete -xc spark -n __fish_use_subcommand -a --min -d "Minimum range value"
-complete -xc spark -n __fish_use_subcommand -a --max -d "Maximum range value"
-
-function spark -d "sparkline generator"
-    if isatty
-        switch "$argv"
-            case {,-}-v{ersion,}
-                echo "spark version $spark_version"
-            case {,-}-h{elp,}
-                echo "usage: spark [--min=<n> --max=<n>] <numbers...>  Draw sparklines"
-                echo "examples:"
-                echo "       spark 1 2 3 4"
-                echo "       seq 100 | sort -R | spark"
-                echo "       awk \\\$0=length spark.fish | spark"
-            case \*
-                echo $argv | spark $argv
-        end
-        return
-    end
-
-    command awk -v FS="[[:space:],]*" -v argv="$argv" '
-        BEGIN {
-            min = match(argv, /--min=[0-9]+/) ? substr(argv, RSTART + 6, RLENGTH - 6) + 0 : ""
-            max = match(argv, /--max=[0-9]+/) ? substr(argv, RSTART + 6, RLENGTH - 6) + 0 : ""
-        }
-        {
-            for (i = j = 1; i <= NF; i++) {
-                if ($i ~ /^--/) continue
-                if ($i !~ /^-?[0-9]/) data[count + j++] = ""
-                else {
-                    v = data[count + j++] = int($i)
-                    if (max == "" && min == "") max = min = v
-                    if (max < v) max = v
-                    if (min > v ) min = v
-                }
-            }
-            count += j - 1
-        }
-        END {
-            n = split(min == max && max ? "▅ ▅" : "▁ ▂ ▃ ▄ ▅ ▆ ▇ █", blocks, " ")
-            scale = (scale = int(256 * (max - min) / (n - 1))) ? scale : 1
-            for (i = 1; i <= count; i++)
-                out = out (data[i] == "" ? " " : blocks[idx = int(256 * (data[i] - min) / scale) + 1])
-            print out
-        }
-    '
-end
-### END OF SPARK ###
-
 
 ### FUNCTIONS ###
 # Spark functions
@@ -212,6 +143,9 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
+# Copy 
+alias clip='xclip -sel clip'
+
 # adding flags
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
@@ -260,3 +194,5 @@ colorscript random
 ### SETTING THE STARSHIP PROMPT ###
 starship init fish | source
 
+### Initialise ssh agent
+fish_ssh_agent
