@@ -1,0 +1,43 @@
+
+#
+#  _ _____ _     _            _
+# (_)___ /| |__ | | ___   ___| | _____
+# | | |_ \| '_ \| |/ _ \ / __| |/ / __|
+# | |___) | |_) | | (_) | (__|   <\__ \
+# |_|____/|_.__/|_|\___/ \___|_|\_\___/
+
+align=center
+separator=true
+# color=#f8f8f2
+separator_block_width=20
+markup=pango
+
+[space]
+command=~/.local/share/i3blocks-modules/disk -cd '#ffffff' 
+interval=60
+
+[wifi]
+command=~/.local/share/i3blocks-modules/wifi -cg '#00ff00' -cc '#ff0000' -fe "{status}" "=" "up" "W: ( {quality}% at {ssid} ) {ip}{ip6}" -fe "{status}" "!=" "up" "W: down"
+interval=10
+
+[battery]
+command=~/.local/share/i3blocks-modules/battery -b 'Battery 1' -cd '#ffffff' -cc '#ff0000' -tc '{percent}' '<' '10' -fe '{status}' '=' 'charging' '⚡CHR {percent}% {time}' -fe '{status}' '!=' 'charging' ' {percent}% {time}'
+interval=10
+
+[brightness]
+command=~/.local/share/i3blocks-modules/backlight -cd '#ffffff'
+interval=once
+signal=11
+
+[volume]
+command=~/.local/share/i3blocks-modules/volume -cd '#ffffff' -cw '#ffff00' -tw '{muted}' '=' 'yes' -fe '{muted}' '=' 'yes' '♪: muted ({volume}%)' -f '♪: {volume}%'
+interval=once
+signal=10
+
+[keyboard_layout]
+command=xkb-switch; xkb-switch -W
+interval=persist
+
+[date]
+command=~/.local/share/i3blocks-modules/date -cd '#ffffff' -f ' {time}' -t '%H:%M %Y-%m-%d'
+interval=30
