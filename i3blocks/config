@@ -39,5 +39,5 @@ command=xkb-switch; xkb-switch -W
 interval=persist
 
 [date]
-command=~/.local/share/i3blocks-modules/date -cd '#ffffff' -f ' {time}' -t '%H:%M %Y-%m-%d'
+command=~/.local/share/i3blocks-modules/date -cd '#ffffff' -f ' {time}' -t '%Y-%m-%d %H:%M'
 interval=30
