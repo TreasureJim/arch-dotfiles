@@ -55,8 +55,7 @@ exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id picom -b
 
 # Set keyboard layout switches
-exec_always --no-startup-id setxkbmap -layout us,se -option 'grp:win_space_toggle'
-bindsym $mod+space exec $refresh_i3status
+exec_always --no-startup-id setxkbmap -layout us,se -option 'grp:ctrls_toggle'
 
 # Use pactl to adjust volume in PulseAudio.
 # set $refresh_i3status killall -SIGUSR1 i3status #outdated because of i3blocks
@@ -137,10 +136,10 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-#bindsym $mod+space focus mode_toggle
+bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
