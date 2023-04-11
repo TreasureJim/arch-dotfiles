@@ -38,6 +38,9 @@ bind('n', '<A-h>', '<C-w>h')
 bind('n', '<A-Up>', '<cmd>vertical resize +3<cr>')
 bind('n', '<A-Down>', '<cmd>vertical resize -3<cr>')
 
+bind('n', '<A-k>', '<C-u>')
+bind('n', '<A-j>', '<C-d>')
+
 bind('n', 'H', '<cmd>bp<cr>')
 bind('n', 'L', '<cmd>bn<cr>')
 

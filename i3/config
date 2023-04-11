@@ -52,7 +52,7 @@ exec --no-startup-id nm-applet
 exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
 
 # Start picom on every start
-exec --no-startup-id picom -b
+# exec --no-startup-id picom -b
 
 # Set keyboard layout switches
 exec_always --no-startup-id setxkbmap -layout us,se -option 'grp:ctrls_toggle'
@@ -84,9 +84,8 @@ bindsym $mod+Shift+q kill
 
 # program launcher
 bindsym $mod+d exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
+
+bindsym Print exec "flameshot gui"
 
 # change focus
 bindsym $mod+h focus left

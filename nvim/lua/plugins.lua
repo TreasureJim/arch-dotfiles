@@ -45,6 +45,7 @@ lazy.setup({
     branch = "main",
     event = "BufRead",
   },
+	{"sheerun/vim-polyglot"},
 
 	-- Bottom status line
   {
@@ -94,9 +95,15 @@ lazy.setup({
   -- { "numToStr/Comment.nvim", config = true, event = "BufEnter" },
 	{"preservim/nerdcommenter"},
 
+  -- Easy Motion plugin
   { "phaazon/hop.nvim", branch = "v2", config = true, event = "BufEnter" },
+
+
   { "lewis6991/gitsigns.nvim", config = true, event = "BufEnter" },
-  { "iamcco/markdown-preview.nvim", ft = "markdown" },
+  {
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && npm install"
+  },
 
   {
     "karb94/neoscroll.nvim",
