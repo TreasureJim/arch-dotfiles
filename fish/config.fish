@@ -1,11 +1,12 @@
 ### EXPORT ###
 set fish_greeting                                 # Supresses fish's intro message
 set TERM "xterm-256color"                         # Sets the terminal type
-set EDITOR "nvim"                 # $EDITOR use Emacs in terminal
-set VISUAL "nvim"              # $VISUAL use Emacs in GUI mode
+set EDITOR "nvim" 
+set VISUAL "nvim"
 
 ### "nvim" as manpager
-# set -x MANPAGER "nvim -c 'set ft=man' -"
+set -x MANPAGER "nvim +Man!"
+set -x MANWIDTH 999
 
 ### SET EITHER DEFAULT EMACS MODE OR VI MODE ###
 function fish_user_key_bindings
@@ -132,6 +133,8 @@ end
 # \x1b[1;1H <- goes to (1, 1) (start)
 # alias clear='echo -en "\x1b[2J\x1b[1;1H" ; echo; echo; seq 1 (tput cols) | sort -R | spark | lolcat; echo; echo'
 
+#alias code="code --ozone-platform=wayland"
+
 alias specs=neofetch
 
 alias ls="exa -a"
@@ -193,7 +196,7 @@ alias mocp="bash -c mocp"
 ### RANDOM COLOR SCRIPT ###
 # Get this script from my GitLab: gitlab.com/dwt1/shell-color-scripts
 # Or install it from the Arch User Repository: shell-color-scripts
-colorscript random
+# colorscript random
 
 ### SETTING THE STARSHIP PROMPT ###
 starship init fish | source
