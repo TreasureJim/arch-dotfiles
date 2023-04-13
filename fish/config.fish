@@ -153,6 +153,8 @@ alias fgrep='fgrep --color=auto'
 # Copy 
 alias clip='xclip -sel clip'
 
+alias scrnshot='grim -g "$(slurp)" - | wl-copy'
+
 # adding flags
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
