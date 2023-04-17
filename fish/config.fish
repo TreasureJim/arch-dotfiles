@@ -1,8 +1,13 @@
 ### EXPORT ###
+
+# Disable loading nvidia modules at startup
+set -Ux __EGL_VENDOR_LIBRARY_FILENAMES "/usr/share/glvnd/egl_vendor.d/50_mesa.json"
+
 set fish_greeting                                 # Supresses fish's intro message
-set TERM "xterm-256color"                         # Sets the terminal type
-set EDITOR "nvim" 
-set VISUAL "nvim"
+set -Ux TERM "xterm-256color"                         # Sets the terminal type
+set -Ux EDITOR "nvim" 
+set -Ux VISUAL "nvim"
+set -Ux GIT_EDITOR "nvim"
 
 ### "nvim" as manpager
 set -x MANPAGER "nvim +Man!"
@@ -133,11 +138,22 @@ end
 # \x1b[1;1H <- goes to (1, 1) (start)
 # alias clear='echo -en "\x1b[2J\x1b[1;1H" ; echo; echo; seq 1 (tput cols) | sort -R | spark | lolcat; echo; echo'
 
-#alias code="code --ozone-platform=wayland"
 
 alias specs=neofetch
 
 alias ls="exa -a"
+
+alias vi=nvim
+
+# Copy 
+alias clip='xclip -sel clip'
+
+alias scrnshot='grim -g "$(slurp)" - | wl-copy'
+
+# Git aliases
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
 
 # get fastest mirrors
 alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
@@ -149,11 +165,6 @@ alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pac
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-
-# Copy 
-alias clip='xclip -sel clip'
-
-alias scrnshot='grim -g "$(slurp)" - | wl-copy'
 
 # adding flags
 alias df='df -h'                          # human-readable sizes
@@ -186,8 +197,7 @@ alias playmov='vlc *.mov'
 alias playmp4='vlc *.mp4'
 
 # the terminal rickroll
-alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
-alias rick='rr'
+alias rick='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
 # Unlock LBRY tips
 alias tips="lbrynet txo spend --type=support --is_not_my_input --blocking"
