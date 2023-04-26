@@ -5,6 +5,7 @@ vim.opt.fileencoding = 'utf-8'
 vim.opt.signcolumn = 'yes'
 
 vim.o.wrap = true
+vim.o.linebreak = true
 vim.o.relativenumber = true
 vim.o.number = true
 vim.o.shiftwidth = 2
@@ -31,3 +32,4 @@ vim.opt.breakindent = true
 vim.opt.backspace = { 'start', 'eol', 'indent' }
 
 vim.opt.termguicolors = true
+
