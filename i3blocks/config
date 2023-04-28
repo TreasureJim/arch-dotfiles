@@ -21,7 +21,7 @@ command=~/.local/share/i3blocks-modules/wifi -cg '#00ff00' -cc '#ff0000' -fe "{s
 interval=10
 
 [battery]
-command=~/.local/share/i3blocks-modules/battery -b 'Battery 1' -cd '#ffffff' -cw '#ff0000' -cc '#ffff00' -tw '{percent}' '<' '10' -tc '{status}' '=' 'unknown' -tc '{percent}' '=' '0' -fe '{status}' '=' 'charging' '⚡CHR {percent}% {time}' -fe '{status}' '!=' 'charging' ' {percent}% {time}' -fe '{status}' '=' 'unknown' '⚠  error' 
+command=~/.local/share/i3blocks-modules/battery -cd '#ffffff' -cw '#ff0000' -cc '#ffff00' -tw '{percent}' '<' '10' -tc '{status}' '=' 'unknown' -tc '{percent}' '=' '0' -fe '{status}' '=' 'charging' '⚡CHR {percent}% {time}' -fe '{status}' '!=' 'charging' ' {percent}% {time}' -fe '{status}' '=' 'unknown' '⚠  error' 
 interval=10
 
 [brightness]
