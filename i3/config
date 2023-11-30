@@ -138,10 +138,10 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-#bindsym $mod+a focus parent
+bindsym $mod+q focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+a focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -217,6 +217,6 @@ bindsym $mod+r mode "resize"
 ## Start i3blocks to display a workspace bar
 bar {
 	position top
-	status_command i3status-rs
+	status_command i3blocks
 }
 
