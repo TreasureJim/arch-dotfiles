@@ -41,12 +41,18 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',             tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
   },
+
+  -- {
+  --   'mfussenegger/nvim-dap',
+  --   opts = {},
+  -- },
+  -- { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
 
   {
     -- Autocompletion
@@ -111,6 +117,8 @@ require('lazy').setup({
       vim.cmd.colorscheme 'oxocarbon'
     end,
   },
+
+  "catppuccin/nvim",
 
   {
     -- Set lualine as statusline
@@ -181,11 +189,13 @@ require('lazy').setup({
     opts = {}
   },
 
+  "sindrets/diffview.nvim",
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
   -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
 
   -- Debugging
   'mfussenegger/nvim-dap',
