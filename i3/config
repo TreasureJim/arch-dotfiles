@@ -214,9 +214,5 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-## Start i3blocks to display a workspace bar
-bar {
-	position top
-	status_command i3blocks
-}
-
+## Start polybar to display a workspace bar
+exec_always --no-startup-id killall -q polybar; polybar
