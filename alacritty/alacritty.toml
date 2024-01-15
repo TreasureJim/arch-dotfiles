@@ -1,0 +1,25 @@
+import = [
+	"/home/judasmoses/.config/alacritty/themes/catppuccin_latte.toml",
+]
+
+[env]
+TERM = "alacritty"
+
+[font]
+size = 9.0
+
+[font.bold]
+family = "Hack Nerd Font Mono"
+style = "Bold"
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Control|Shift"
+
+[window]
+opacity = 1
