@@ -1,5 +1,5 @@
 import = [
-	"/home/judasmoses/.config/alacritty/themes/catppuccin_latte.toml",
+	"/home/judasmoses/.config/alacritty/themes/one_dark.toml",
 ]
 
 [env]
@@ -9,11 +9,11 @@ TERM = "alacritty"
 size = 9.0
 
 [font.bold]
-family = "Hack Nerd Font Mono"
+family = "Hack"
 style = "Bold"
 
 [font.normal]
-family = "Hack Nerd Font Mono"
+family = "Hack"
 style = "Regular"
 
 [[keyboard.bindings]]
@@ -23,3 +23,6 @@ mods = "Control|Shift"
 
 [window]
 opacity = 1
+
+[shell]
+program = "/sbin/fish"
