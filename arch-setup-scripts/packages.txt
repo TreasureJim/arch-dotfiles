@@ -1,0 +1,18 @@
+alacritty
+firefox
+ttf-hack
+noto-fonts noto-fonts-emoji noto-fonts-extra
+ttf-font-awesome
+fish
+git
+neovim
+starship
+i3blocks
+exa
+yay
+libinput
+xorg-xinput
+acpi
+ncdu
+arandr
+xclip
