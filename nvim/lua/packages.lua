@@ -41,7 +41,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',             tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -106,9 +106,15 @@ require('lazy').setup({
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
+  },
+
+  "catppuccin/nvim",
+
+  {
+    'nyoom-engineering/oxocarbon.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      vim.cmd.colorscheme 'oxocarbon'
     end,
   },
 
@@ -173,6 +179,10 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  {
+    "sindrets/diffview.nvim"
+  },
+
   -- Auto-close brackets
   {
     'm4xshen/autoclose.nvim',
@@ -192,11 +202,21 @@ require('lazy').setup({
   -- require 'kickstart.plugins.autoformat',
   require 'kickstart.plugins.debug',
 
+  -- Debugging
+  'mfussenegger/nvim-dap',
+  'rcarriga/nvim-dap-ui',
+  {
+    'jay-babu/mason-nvim-dap.nvim',
+    opts = {}
+  },
+
+
+
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
