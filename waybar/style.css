@@ -1,0 +1,95 @@
+@define-color white	#c0caf5;
+* {
+  font-family:
+    SpaceMono Nerd Font,
+    feather;
+  font-weight: 500;
+  font-size: 11pt;
+  margin-top: 1px;
+}
+
+/* main waybar */
+#waybar {
+  background: rgba(26, 27, 38, 0);
+  color: @white;
+}
+
+/* when hovering over modules */
+tooltip {
+  background: #1e1e2e;
+  border-radius: 5%;
+}
+
+#workspaces button {
+  padding: 2px;
+  color: @white;
+}
+
+/* Sets active workspace to have a solid line on the bottom */
+#workspaces button.focused {
+  background-color: #F6C582;
+  color: black;
+
+  transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+  color: #a6adc8;
+}
+
+#workspaces button.urgent {
+  color: #f7768e;
+}
+
+#workspaces button:hover {
+  background: #11111b;
+  color: #cdd6f4;
+}
+
+/* Sets background, padding, margins, and borders for (all) modules */
+#workspaces,
+#clock,
+#window,
+#temperature,
+#cpu,
+#memory,
+#wireplumber,
+#tray,
+#battery {
+  background: rgba(26, 27, 38, 0.6);
+  padding: 0 10px;
+  border: 0;
+}
+
+#workspaces {
+  margin-left: 3px;
+  border-radius: 12px 12px 12px 12px;
+}
+
+/* Hide window module when not focused on window or empty workspace */
+window#waybar.empty #window {
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+}
+
+/* Set up rounding to make these modules look like separate pills */
+#tray {
+  border-radius: 12px;
+  margin-right: 4px;
+}
+
+#window {
+  border-radius: 12px;
+}
+
+/* close left side of bar */
+#cpu {
+  border-radius: 12px 0 0 12px;
+}
+
+/* close right side of bar */
+#clock.date {
+  border-radius: 0 12px 12px 0;
+  margin-right: 5px;
+}
