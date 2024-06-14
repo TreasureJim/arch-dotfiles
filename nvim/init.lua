@@ -5,12 +5,12 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 
--- [[ Setting options ]]
-require('options')
-
-
 -- [[ Installing Packages ]]
 require('packages')
+
+
+-- [[ Setting options ]]
+require('options')
 
 
 -- [[ Basic Keymaps ]]
