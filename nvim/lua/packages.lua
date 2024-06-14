@@ -180,6 +180,10 @@ require('lazy').setup({
   },
 
   {
+    'scrooloose/nerdtree',
+  },
+
+  {
     "sindrets/diffview.nvim"
   },
 
