@@ -114,7 +114,7 @@ require('lazy').setup({
     'nyoom-engineering/oxocarbon.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'oxocarbon'
+      -- vim.cmd.colorscheme 'oxocarbon'
     end,
   },
 
@@ -177,6 +177,10 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
+  },
+
+  {
+    'scrooloose/nerdtree',
   },
 
   {
