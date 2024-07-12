@@ -1,0 +1,8 @@
+configuration {
+	modi: "drun,calc,window,run";
+	width: 25;
+	show-icons: true;
+	lines: 10;
+	fake-transparency: true;
+	sidebar-mode: true;
+}
