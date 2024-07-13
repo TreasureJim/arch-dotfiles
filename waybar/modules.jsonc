@@ -1,11 +1,11 @@
 // Modules configuration
 {
   "clock#time": {
-    "format": "<span color=\"#7aa2f7\"> </span>{:%H:%M:%S}",
+    "format": "<span color=\"#7aa2f7\">󰥔 </span>{:%H:%M:%S}",
     "interval": 1,
   },
   "clock#date": {
-    "format": "<span color=\"#7aa2f7\"> </span>{:%d/%m/%Y}",
+    "format": "<span color=\"#7aa2f7\">󰃭 </span>{:%d/%m/%Y}",
     "tooltip-format": "<tt>{calendar}</tt>",
     "interval": 360,
     "calendar": {
@@ -24,11 +24,11 @@
     },
   },
   "cpu": {
-    "format": "<span color=\"#7aa2f7\"> </span>{usage}%",
+    "format": "<span color=\"#7aa2f7\"> </span>{usage}%",
     "interval": 4,
   },
   "memory": {
-    "format": "<span color=\"#7aa2f7\"> </span>{used}GiB",
+    "format": "<span color=\"#7aa2f7\"> </span>{used}GiB",
     "interval": 4,
   },
   "temperature": {
@@ -41,8 +41,8 @@
   "wireplumber": {
     "scroll-step": 5, // %, can be a float
     "format": "<span color=\"#7aa2f7\">{icon} </span>{volume}%",
-    "format-muted": "<span color=\"#f7768e\"> </span>Muted",
-    "format-icons": ["", "", ""],
+    "format-muted": "<span color=\"#f7768e\"> </span>Muted",
+    "format-icons": ["", "", ""],
     "on-click": "pavucontrol",
   },
   "hyprland/window": {
