@@ -66,7 +66,11 @@ require('nvim-treesitter.configs').setup {
   ignore_install = {},
 
   highlight = { enable = true },
-  indent = { enable = true },
+  indent = {
+    -- enable = false,
+    enable = true,
+    disable = { "gdscript" },   -- Disable indent for GDScript files
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -233,7 +237,7 @@ mason_lspconfig.setup_handlers {
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
-cmp.setup ({
+cmp.setup({
 
   snippet = {
     expand = function(args)
