@@ -20,9 +20,9 @@ vim.o.number = true
 
 vim.o.shiftwidth = 2
 
-vim.o.tabstop = 2
+-- vim.o.tabstop = 2
 
-vim.o.softtabstop = 2
+-- vim.o.softtabstop = 2
 
 vim.o.showmode = false
 
@@ -40,7 +40,7 @@ vim.opt.cmdheight = 1
 
 vim.opt.laststatus = 3
 
-vim.opt.expandtab = false
+-- vim.opt.expandtab = false
 
 vim.opt.scrolloff = 10
 
