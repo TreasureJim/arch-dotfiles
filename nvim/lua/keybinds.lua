@@ -70,7 +70,7 @@ require('nvim-treesitter.configs').setup {
   indent = {
     -- enable = false,
     enable = true,
-    disable = { "gdscript" },   -- Disable indent for GDScript files
+    disable = { "gdscript" }, -- Disable indent for GDScript files
   },
   incremental_selection = {
     enable = true,
@@ -284,16 +284,5 @@ cmp.setup({
   },
 })
 
--- [[Configure debuggers]]
-local dap = require('dap')
-vim.keymap.set("n", "<F5>", dap.continue)
-vim.keymap.set("n", "<F10>", dap.step_over)
-vim.keymap.set("n", "<F11>", dap.step_into)
-vim.keymap.set("n", "<F12>", dap.step_out)
-vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
--- vim.keymap.set("n", "<leader>", dap.continue)
--- vim.keymap.set("n", "<leader>", dap.continue)
--- vim.keymap.set("n", "<leader>", dap.continue)
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+local theme_switcher = require('custom.plugins.theme-switcher')
+vim.api.nvim_create_user_command('Theme', theme_switcher.select_theme, {})

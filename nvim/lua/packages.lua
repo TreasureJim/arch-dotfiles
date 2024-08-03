@@ -41,7 +41,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',             tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -103,22 +103,9 @@ require('lazy').setup({
     },
   },
 
-  {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-  },
-
+  'navarasu/onedark.nvim',
   "catppuccin/nvim",
-
-  {
-    'nyoom-engineering/oxocarbon.nvim',
-    priority = 1000,
-    config = function()
-      -- vim.cmd.colorscheme 'oxocarbon'
-    end,
-  },
-
-  "catppuccin/nvim",
+  'nyoom-engineering/oxocarbon.nvim',
 
   {
     -- Set lualine as statusline
@@ -180,6 +167,11 @@ require('lazy').setup({
   },
 
   {
+    'habamax/vim-godot',
+    event = 'VimEnter'
+  },
+
+  {
     'scrooloose/nerdtree',
   },
 
@@ -214,7 +206,19 @@ require('lazy').setup({
     opts = {}
   },
 
+  {
+    'theme-switcher',
+    dir = '~/.config/nvim/lua/custom/plugins',
+    dev=true,
+    opt = {},
+  },
 
+  -- { 
+  --   import = 'custom.plugins.theme-switcher',
+  --   config = function()
+  --     require('custom.plugins.theme-switcher').select_theme()
+  --   end
+  -- },
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -222,5 +226,5 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  { import = 'custom.plugins' },
+  -- { import = 'custom.plugins', dev=true },
 }, {})

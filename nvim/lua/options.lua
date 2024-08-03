@@ -8,7 +8,7 @@
 -- vim.opt.fileencoding = 'utf-8'
 --
 
-vim.cmd.colorscheme 'catppuccin-latte'
+-- vim.cmd.colorscheme 'catppuccin-mocha'
 
 vim.o.wrap = true
 
@@ -18,11 +18,11 @@ vim.o.relativenumber = true
 
 vim.o.number = true
 
-vim.o.shiftwidth = 2
+-- vim.o.shiftwidth = 2
 
-vim.o.tabstop = 2
+-- vim.o.tabstop = 2
 
-vim.o.softtabstop = 2
+-- vim.o.softtabstop = 2
 
 vim.o.showmode = false
 
