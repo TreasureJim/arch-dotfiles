@@ -15,4 +15,3 @@ require('options')
 
 -- [[ Basic Keymaps ]]
 require('keybinds')
-
