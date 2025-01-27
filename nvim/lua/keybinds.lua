@@ -183,6 +183,8 @@ local on_attach = function(client, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 
+  nmap('<leader>F', vim.lsp.buf.format, '[F]ormat current buffer')
+
   if client.name == 'clangd' then
     nmap('<leader>gh', '<Cmd>ClangdSwitchSourceHeader<CR>', '[G]oto [H]eader')
   end
