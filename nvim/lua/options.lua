@@ -40,7 +40,7 @@ vim.opt.cmdheight = 1
 
 vim.opt.laststatus = 3
 
-vim.opt.expandtab = false
+-- vim.opt.expandtab = false
 
 vim.opt.scrolloff = 10
 
