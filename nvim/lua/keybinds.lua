@@ -202,7 +202,6 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   pyright = {},
-  rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
@@ -239,13 +238,16 @@ mason_lspconfig.setup_handlers {
   end
 }
 
+-- Manually setup some LSPs
+local lspconfig = require('lspconfig')
+lspconfig.rust_analyzer.setup {}
+
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 cmp.setup({
-
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -258,7 +260,7 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
+      behavior = cmp.ConfirmBehavior.Insert,
       select = false, -- dont select first option unless i have manually selected it
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
