@@ -200,7 +200,13 @@ require('lazy').setup({
 
   -- Debugging
   'mfussenegger/nvim-dap',
-  'rcarriga/nvim-dap-ui',
+  {
+    'rcarriga/nvim-dap-ui',
+    dependencies = {
+      'nvim-neotest/nvim-nio'
+    }
+  },
+
   {
     'jay-babu/mason-nvim-dap.nvim',
     opts = {}
