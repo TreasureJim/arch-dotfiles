@@ -1,7 +1,8 @@
 set $mod Mod4
 set $alt Mod1
 
-set $menu wofi
+# set $menu "rofi -show drun -monitor '$(swaymsg -t get\_outputs | jq -c '.[] | select(.focused) | select(.id)' | jq -c '.name')'"
+set $menu ~/.config/sway/focus-monitor.sh
 
 input * {
                 xkb_layout "us,se"
@@ -13,8 +14,9 @@ for_window [class="^.*"] border pixel 2
 gaps inner 5
 gaps outer 0
 
-output HDMI-A-1 pos 0 0 res 1920x1200
-output DVI-D-1 pos 1920 0 res 1920x1080
+output HDMI-A-2 disable pos 0 0 res 1920x1080
+output DP-2 pos 1920 0 res 1920x1200
+output HDMI-A-1 pos 3840 0 res 1920x1080
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -30,7 +32,7 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 client.background       #F8F8F2
 
 # fix long startup
-exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec_always dbus-update-activation-environment --systemd DISPLAY XAUTHORITY WAYLAND_DISPLAY; gnome-keyring-daemon --start --components=secrets
 
 # start authentication agent
 #exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -38,11 +40,13 @@ exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
+exec --no-startup-id dex -a
+
 
 # Start dunst with the config file
 exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
 
+exec --no-startup-id ~/.config/sway/dbus-update.sh
 
 set $refresh_volume pkill -SIGRTMIN+10 i3blocks
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_volume
@@ -55,6 +59,7 @@ bindsym XF86MonBrightnessUp exec --no-startup-id brillo -A 5 && $refresh_brightn
 bindsym XF86MonBrightnessDown exec --no-startup-id brillo -U 5 && $refresh_brightness
 
 bindsym Print exec 'grim -g "$(slurp)" - | wl-copy'
+bindsym $mod+Print exec 'grim -g "$(slurp)" - | swappy -f -'
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -66,7 +71,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # program launcher
-bindsym $mod+d exec $menu
+bindsym $mod+d exec --no-startup-id sh ~/.config/sway/rofi.sh
 
 # change focus
 bindsym $mod+h focus left
@@ -138,8 +143,8 @@ set $ws9 "9"
 set $ws10 "10"
 
 # Default monitor for workspace
-set $displ1 HDMI-A-1
-set $displ2 DVI-D-1
+set $displ1 DP-2
+set $displ2 HDMI-A-1
 
 workspace 1 output $displ1
 
