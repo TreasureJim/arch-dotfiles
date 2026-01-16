@@ -56,4 +56,9 @@
     "disable-scroll": true,
     "on-click": "activate",
   },
+  "hyprland/language": {
+      "format": "<span color=\"#7aa2f7\"> </span> {short}",
+      // "keyboard-name": "at-translated-set-2-keyboard",  // Replace with your keyboard name
+      "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next" // Replace with your keyboard name
+  },
 }

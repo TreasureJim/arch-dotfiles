@@ -215,3 +215,20 @@ starship init fish | source
 
 ### Initialise ssh agent
 fish_ssh_agent
+
+zoxide init --cmd cd fish | source
+
+### Disable Conda when not using
+# # >>> conda initialize >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# if test -f /home/judasmoses/anaconda3/bin/conda
+#     eval /home/judasmoses/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+# else
+#     if test -f "/home/judasmoses/anaconda3/etc/fish/conf.d/conda.fish"
+#         . "/home/judasmoses/anaconda3/etc/fish/conf.d/conda.fish"
+#     else
+#         set -x PATH "/home/judasmoses/anaconda3/bin" $PATH
+#     end
+# end
+# # <<< conda initialize <<<
+
