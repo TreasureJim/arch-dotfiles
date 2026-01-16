@@ -34,7 +34,8 @@ tooltip {
 }
 
 #workspaces button.active {
-  color: #a6adc8;
+  color: black;
+  background: #889efc;
 }
 
 #workspaces button.urgent {
@@ -55,7 +56,9 @@ tooltip {
 #memory,
 #wireplumber,
 #tray,
-#battery {
+#battery,
+#language
+{
   background: rgba(26, 27, 38, 0.6);
   padding: 0 10px;
   border: 0;
@@ -84,7 +87,7 @@ window#waybar.empty #window {
 }
 
 /* close left side of bar */
-#cpu {
+#language {
   border-radius: 12px 0 0 12px;
 }
 

@@ -46,7 +46,7 @@ end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sH', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
@@ -132,8 +132,8 @@ require('nvim-treesitter.configs').setup {
 
 
 -- Keybinding to toggle NERDTree
-vim.api.nvim_set_keymap('n', '<C-e>', ':NERDTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-E>', ':NERDTreeFind<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-e>', ':NERDTreeToggle<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-E>', ':NERDTreeFind<CR>', { noremap = true, silent = true })
 
 
 -- Diagnostic keymaps
@@ -141,6 +141,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>Q', vim.diagnostic.setqflist, { desc = 'Open project-wide diagnostics list' })
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
@@ -163,6 +164,7 @@ local on_attach = function(client, bufnr)
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+  nmap('gD', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>gD', vim.lsp.buf.type_definition, 'Type [D]efinition')
@@ -224,29 +226,55 @@ require('neodev').setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
+-- Configure LSP servers using the new native vim.lsp.config() API
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
+    },
+  },
+})
+
+vim.lsp.config("*", {
+  on_attach = on_attach
+})
+vim.lsp.config("rust-analyzer", {
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+    vim.keymap.set(
+      "n",
+      "<leader>ca",
+      function()
+        vim.cmd.RustLsp('codeAction') -- supports rust-analyzer's grouping
+        -- or vim.lsp.buf.codeAction() if you don't want grouping.
+      end,
+      { silent = true, buffer = bufnr }
+    )
+    vim.keymap.set(
+      "n",
+      "K", -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
+      function()
+        vim.cmd.RustLsp({ 'hover', 'actions' })
+      end,
+      { silent = true, buffer = bufnr }
+    )
+  end
+})
+vim.lsp.config('pyright', {})
+vim.lsp.config('texlab', {})
+
+-- Setup mason-lspconfig with the new automatic_enable setting
+local mason_lspconfig = require('mason-lspconfig')
 
 mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
+  automatic_installation = true, -- This replaces the old handlers approach
+  handlers = on_attach,
 }
 
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end
-}
-
--- Manually setup some LSPs
-local lspconfig = require('lspconfig')
-lspconfig.rust_analyzer.setup {
-  on_attach = on_attach
-}
+-- nvim-cmp supports additional completion capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
@@ -296,3 +324,18 @@ cmp.setup({
 
 local theme_switcher = require('custom.plugins.theme-switcher')
 vim.api.nvim_create_user_command('Theme', theme_switcher.select_theme, {})
+
+local manim_map = function(keys, func, desc)
+  if desc then
+    desc = 'Manim: ' .. desc
+  end
+
+  vim.keymap.set('v', keys, func, { desc = desc })
+end
+local manim = require('custom.plugins.manim-interactive')
+
+manim_map("<leader>mr", manim.manim_run_scene, "Run Scene")
+manim_map("<leader>mp", manim.manim_checkpoint_paste, "Checkpoint Paste")
+manim_map("<leader>mR", manim.manim_recorded_checkpoint_paste, "Recorded Checkpoint Paste")
+manim_map("<leader>ms", manim.manim_skipped_checkpoint_paste, "Skipped Checkpoint Paste")
+manim_map("<leader>mE", manim.manim_exit, "Exit")
