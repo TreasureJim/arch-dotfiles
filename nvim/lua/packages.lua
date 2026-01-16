@@ -33,7 +33,14 @@ require('lazy').setup({
   --  The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
-    'neovim/nvim-lspconfig',
+    "neovim/nvim-lspconfig",
+    init_options = {
+      userLanguages = {
+        eelixir = "html-eex",
+        eruby = "erb",
+      },
+    },
+
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
@@ -201,6 +208,25 @@ require('lazy').setup({
     }
   },
 
+  -- Sorround plugin
+  {
+    'nvim-mini/mini.surround',
+    version = false,
+    opts = {
+      mappings = {
+        add = '<leader>sa',    -- Add surrounding in Normal and Visual modes
+        delete = '<leader>sd', -- Delete surrounding
+        find = '<leader>sf',   -- Find surrounding (to the right)
+        find_left = '<leader>sF', -- Find surrounding (to the left)
+        highlight = '<leader>sh', -- Highlight surrounding
+        replace = '<leader>sr', -- Replace surrounding
+
+        suffix_last = '<leader>l', -- Suffix to search with "prev" method
+        suffix_next = '<leader>n', -- Suffix to search with "next" method
+      },
+    }
+  },
+
   "sindrets/diffview.nvim",
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -224,11 +250,30 @@ require('lazy').setup({
     opts = {}
   },
 
+  "vuciv/golf",
+
   {
     'theme-switcher',
     dir = '~/.config/nvim/lua/custom/plugins',
     dev = true,
     opt = {},
+  },
+
+  {
+    'manim-interactive',
+    dir = '~/.config/nvim/lua/custom/plugins',
+    dev = true,
+    opt = {},
+
+    dependencies = {
+      "akinsho/toggleterm.nvim"
+    }
+  },
+
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^6', -- Recommended
+    lazy = false, -- This plugin is already lazy
   },
 
   -- {

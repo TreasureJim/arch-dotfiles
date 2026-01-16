@@ -49,7 +49,7 @@ vim.opt.scrolloff = 10
 vim.opt.backspace = { 'start', 'eol', 'indent' }
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
