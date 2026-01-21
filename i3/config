@@ -219,7 +219,7 @@ bindsym $mod+r mode "resize"
 
 # Notification Binds
 bindsym $mod+n exec dunstctl action && dunstctl close
-bindsym $mod+Alt+n exec dunstctl close-all
+bindsym $mod+$alt+n exec dunstctl close-all
 
 ## Start polybar to display a workspace bar
 exec_always --no-startup-id ~/.config/i3/start_polybar.sh
