@@ -146,12 +146,6 @@ vim.keymap.set('n', '<leader>Q', vim.diagnostic.setqflist, { desc = 'Open projec
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(client, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
-  -- In this case, we create a function that lets us more easily define mappings specific
-  -- for LSP related items. It sets the mode, buffer and description for us each time.
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -191,49 +185,22 @@ local on_attach = function(client, bufnr)
   nmap('<leader>F', vim.lsp.buf.format, '[F]ormat current buffer')
 
   if client.name == 'clangd' then
-    nmap('<leader>gh', '<Cmd>ClangdSwitchSourceHeader<CR>', '[G]oto [H]eader')
+    nmap('<leader>gh', '<Cmd>LspClangdSwitchSourceHeader<CR>', '[G]oto [H]eader')
   end
 end
-
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
---
---  If you want to override the default filetypes that your language server will attach to you can
---  define the property 'filetypes' to the map in question.
-local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  pyright = {},
-  texlab = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
-}
-
--- Setup neovim lua configuration
-require('neodev').setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- Configure LSP servers using the new native vim.lsp.config() API
-vim.lsp.config('lua_ls', {
-  settings = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup("GlobalLspConfig", {}),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local bufnr = args.buf
+
+    on_attach(client, bufnr)
+  end
 })
 
 vim.lsp.config("*", {
