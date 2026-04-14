@@ -164,16 +164,10 @@ require('lazy').setup({
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-      -- Only load if `make` is available. Make sure you have the system
-      -- requirements installed.
       {
         'nvim-telescope/telescope-fzf-native.nvim',
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
         build = 'make',
         cond = function()
           return vim.fn.executable 'make' == 1
@@ -185,10 +179,22 @@ require('lazy').setup({
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
+    branch = "main",
     build = ':TSUpdate',
+    init = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function()
+          -- Enable treesitter highlighting and disable regex syntax
+          pcall(vim.treesitter.start)
+          -- Enable treesitter-based indentation
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+    end
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'main',
   },
 
   {
@@ -232,12 +238,12 @@ require('lazy').setup({
     version = false,
     opts = {
       mappings = {
-        add = '<leader>sa',    -- Add surrounding in Normal and Visual modes
-        delete = '<leader>sd', -- Delete surrounding
-        find = '<leader>sf',   -- Find surrounding (to the right)
-        find_left = '<leader>sF', -- Find surrounding (to the left)
-        highlight = '<leader>sh', -- Highlight surrounding
-        replace = '<leader>sr', -- Replace surrounding
+        add = '<leader>sa',        -- Add surrounding in Normal and Visual modes
+        delete = '<leader>sd',     -- Delete surrounding
+        find = '<leader>sf',       -- Find surrounding (to the right)
+        find_left = '<leader>sF',  -- Find surrounding (to the left)
+        highlight = '<leader>sh',  -- Highlight surrounding
+        replace = '<leader>sr',    -- Replace surrounding
 
         suffix_last = '<leader>l', -- Suffix to search with "prev" method
         suffix_next = '<leader>n', -- Suffix to search with "next" method
@@ -291,7 +297,7 @@ require('lazy').setup({
   {
     'mrcjkb/rustaceanvim',
     version = '^6', -- Recommended
-    lazy = false, -- This plugin is already lazy
+    lazy = false,   -- This plugin is already lazy
   },
 
   -- {

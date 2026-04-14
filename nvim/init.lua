@@ -15,3 +15,6 @@ require('options')
 
 -- [[ Basic Keymaps ]]
 require('keybinds')
+
+-- [[ File type specific settings ]]
+require('filetypes')
